@@ -1,0 +1,3293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+						xmlns:gml="http://www.opengis.net/gml" 
+						xmlns:deegreewfs="http://www.deegree.org/wfs"
+						xmlns:dgjdbc="http://www.deegree.org/jdbc" 
+						xmlns:app="http://www.deegree.org/app"
+  					targetNamespace="http://www.deegree.org/app" 
+						elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <!-- configuration of the persistence backend to be used -->
+
+	<xsd:annotation>
+    <xsd:appinfo>
+      <deegreewfs:Prefix>app</deegreewfs:Prefix>
+      <deegreewfs:Backend>ORACLE</deegreewfs:Backend>
+      <deegreewfs:DefaultSRS>EPSG:4326</deegreewfs:DefaultSRS>
+      <dgjdbc:JDBCConnection>
+        <dgjdbc:Driver>oracle.jdbc.OracleDriver</dgjdbc:Driver>
+        <!-- database url -->
+        <dgjdbc:Url>*****to_be_filled_in*****</dgjdbc:Url>
+        <dgjdbc:User>*****to_be_filled_in*****</dgjdbc:User>
+        <dgjdbc:Password>*****to_be_filled_in*****</dgjdbc:Password>
+        <dgjdbc:SecurityConstraints />
+        <dgjdbc:Encoding>UTF-8</dgjdbc:Encoding>
+      </dgjdbc:JDBCConnection>
+      <deegreewfs:SuppressXLinkOutput>true</deegreewfs:SuppressXLinkOutput>
+    </xsd:appinfo>
+  </xsd:annotation>
+
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinDatasets" type="app:DatasetsType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.DATA_SETS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:dataset:">
+          <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+        <deegreewfs:DefaultSRS>EPSG:4326</deegreewfs:DefaultSRS>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="DatasetsType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+
+          <!-- simple (integer) valued property 'data_set_id' (feature id without prefix) -->
+          <xsd:element name="data_set_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'platform_id' -->
+          <xsd:element name="platform_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PLATFORM_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'data_set_title' -->
+          <xsd:element name="data_set_title" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_TITLE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'data_set_short_title' -->
+          <xsd:element name="data_set_short_title" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_SHORT_TITLE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'contributors' -->
+          <xsd:element name="contributors" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CONTRIBUTORS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'anzlic_identifier' -->
+          <xsd:element name="anzlic_identifier" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_IDENTIFIER" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'abstract' -->
+          <xsd:element name="abstract" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ABSTRACT" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'reference_information' -->
+          <xsd:element name="reference_information" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="REFERENCE_INFORMATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'project_id' -->
+          <xsd:element name="global_project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GLOBAL_PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'project_id' -->
+          <xsd:element name="project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'enterer_id' -->
+          <xsd:element name="enterer_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ENTERER_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'updating_organisation_id' -->
+          <xsd:element name="updating_organisation_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="UPDATING_ORGANISATION_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'keyword_id' located in related table -->
+          <xsd:element name="keyword_id" type="xsd:integer" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="KYWD_KEYWORD_ID" type="INTEGER"/>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="DS_DATA_SET_ID" type="INTEGER" table="MARLIN.DATA_SET_KEYWORDS"/>
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'keyword' -->
+          <xsd:element name="keyword" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinKeywords">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="DS_DATA_SET_ID" type="INTEGER" table="MARLIN.DATA_SET_KEYWORDS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="KYWD_KEYWORD_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="KEYWORD_ID" type="INTEGER" table="MARLIN.KEYWORDS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (date) valued property 'metadata_last_updated' -->
+          <xsd:element name="metadata_last_updated" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="METADATA_LAST_UPDATED" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (date) valued property 'metadata_inserted_on' -->
+          <xsd:element name="metadata_inserted_on" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="METADATA_INSERTED_ON" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'metadata_inserted_by' -->
+          <xsd:element name="metadata_inserted_by" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="METADATA_INSERTED_BY" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (integer) valued property 'metadata_updated_by' -->
+          <xsd:element name="metadata_updated_by" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="METADATA_UPDATED_BY" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'progress' -->
+          <xsd:element name="progress" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROGRESS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+	<!-- simple (date) valued property 'publication_date' -->
+          <xsd:element name="publication_date" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:SQLFunctionCall call="TO_CHAR($1, 'yyyy-mm-dd')" type="VARCHAR">
+                    <deegreewfs:FunctionParam>
+                      <deegreewfs:MappingField field="PUBLICATION_DATE" type="DATE"/>
+                    </deegreewfs:FunctionParam>
+                  </deegreewfs:SQLFunctionCall>
+
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'access_constraint' -->
+          <xsd:element name="access_constraint" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ACCESS_CONSTRAINT" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'attribute_accuracy' -->
+          <xsd:element name="attribute_accuracy" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ATTRIBUTE_ACCURACY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'positional_accuracy' -->
+          <xsd:element name="positional_accuracy" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="POSITIONAL_ACCURACY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'completeness' -->
+          <xsd:element name="completeness" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="COMPLETENESS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'data_set_status' -->
+          <xsd:element name="data_set_status" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_STATUS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'data_type' -->
+          <xsd:element name="data_type" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_TYPE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'lineage' -->
+          <xsd:element name="lineage" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LINEAGE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'additional_metadata' -->
+          <xsd:element name="additional_metadata" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ADDITIONAL_METADATA" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'date_to_review_text' -->
+          <xsd:element name="date_to_review_text" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATE_TO_REVIEW_TEXT" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'acknowledgements' -->
+          <xsd:element name="acknowledgements" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ACKNOWLEDGEMENTS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'mest_uuid' -->
+          <xsd:element name="mest_uuid" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MEST_UUID" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (string) valued property 'logical_consistency' -->
+          <xsd:element name="logical_consistency" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LOGICAL_CONSISTENCY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (date) valued property 'beginning_date' -->
+          <xsd:element name="beginning_date" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="BEGINNING_DATE" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (date) valued property 'ending_date' -->
+          <xsd:element name="ending_date" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ENDING_DATE" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'min_depth' -->
+          <xsd:element name="min_depth" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MIN_DEPTH" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'max_depth' -->
+          <xsd:element name="max_depth" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAX_DEPTH" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'west_bounding_coord' -->
+          <xsd:element name="west_bounding_coord" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="WEST_BOUNDING_COORD" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'east_bounding_coord' -->
+          <xsd:element name="east_bounding_coord" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="EAST_BOUNDING_COORD" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'south_bounding_coord' -->
+          <xsd:element name="south_bounding_coord" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOUTH_BOUNDING_COORD" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple (float) valued property 'north_bounding_coord' -->
+          <xsd:element name="north_bounding_coord" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="NORTH_BOUNDING_COORD" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (float) property 'cell_size' -->
+          <xsd:element name="cell_size" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                   <deegreewfs:MappingField field="CELL_SIZE" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued (integer) property 'cell_size_unit' -->
+          <xsd:element name="cell_size_unit" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinUnits">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                   		<deegreewfs:MappingField field="CELL_SIZE_UNIT" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="UNIT_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued property 'custodian_org_id' -->
+          <xsd:element name="custodian_org_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CUSTODIAN_ORG_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'custodian_organisations' -->
+          <xsd:element name="custodian_organisations" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinOrganisations">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="CUSTODIAN_ORG_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'contact_org_id' -->
+          <xsd:element name="contact_org_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                   <deegreewfs:MappingField field="CONTACT_ORG_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'contact_organisations' -->
+          <xsd:element name="contact_organisations" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinOrganisations">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="CONTACT_ORG_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'contact_person_id' -->
+          <xsd:element name="contact_person_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                   <deegreewfs:MappingField field="CONTACT_PERSON_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'metadata_owner' -->
+          <xsd:element name="metadata_owner" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                   <deegreewfs:MappingField field="METADATA_OWNER" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'originator_org_id' -->
+          <xsd:element name="originator_org_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                   <deegreewfs:MappingField field="ORIGINATOR_ORG_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'contact_persons' -->
+          <xsd:element name="contact_persons" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinPersons">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="CONTACT_PERSON_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="PERSON_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'data_coverage' -->
+          <xsd:element name="data_coverage" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinDataCoverage">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'survey_id' located in related table data_set_surveys -->
+          <xsd:element name="survey_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_ID" type="INTEGER" />
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" table="MARLIN.DATA_SET_SURVEYS"/>
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- simple valued (integer) property 'url_id' located in related table data_set_urls -->
+          <xsd:element name="url_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="URL_ID" type="INTEGER" />
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DS_DATA_SET_ID" type="INTEGER" table="MARLIN.DATA_SET_URLS"/>
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'data_set_urls' -->
+          <xsd:element name="data_set_urls" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinDatasetUrls">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DS_DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'regions' -->
+          <xsd:element name="region" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinDatasetRegions">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="DS_DATA_SET_ID" type="INTEGER" table="MARLIN.DATA_SET_GEOGRAPHIC_EXTENTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DEFREG_REG_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DEFINED_REGION_ID" type="INTEGER" table="MARLIN.DEFINED_REGIONS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'taxonomy' -->
+          <xsd:element name="taxonomy" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinDatasetTaxonomy">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'gis_warehouse_data' -->
+          <xsd:element name="gis_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="GIS_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'netcdf_warehouse_data' -->
+          <xsd:element name="netcdf_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="NETCDF_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'adcpship_warehouse_data' -->
+          <xsd:element name="adcpship_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="ADCP_SHIP_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'ctd_warehouse_data' -->
+          <xsd:element name="ctd_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="CTD_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'hyd_warehouse_data' -->
+          <xsd:element name="hyd_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="HYDROLOGY_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'uwy_warehouse_data' -->
+          <xsd:element name="uwy_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="UNDERWAY_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'moored_warehouse_data' -->
+          <xsd:element name="moored_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="MOORED_INSTRUMENT_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+          <!-- complex valued property 'catch_warehouse_data' -->
+          <xsd:element name="catch_warehouse_data" type="gml:FeaturePropertyType" minOccurs="0" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:WarehouseCodelists">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="MARLIN_ID" type="INTEGER" table="CATCH_HEADER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SECURITY_CODE" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" table="WAREHOUSECODELISTS" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinDatasetRegions                                                -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinDatasetRegions" type="app:DatasetRegionsType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.DEFINED_REGIONS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:region:">
+          <deegreewfs:MappingField field="DEFINED_REGION_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="DatasetRegionsType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'defined_region_id' -->
+          <xsd:element name="defined_region_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DEFINED_REGION_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'defined_region_name' -->
+          <xsd:element name="defined_region_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DEFINED_REGION_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'location_description' -->
+          <xsd:element name="location_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LOCATION_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'region_category' -->
+          <xsd:element name="region_category" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="REGION_CATEGORY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'region_identifier' -->
+          <xsd:element name="region_identifier" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="REGION_IDENTIFIER" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'anzlic_name' -->
+          <xsd:element name="anzlic_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'anzlic_category' -->
+          <xsd:element name="anzlic_category" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_CATEGORY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'anzlic_jurisdiction' -->
+          <xsd:element name="anzlic_jurisdiction" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_JURISDICTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'east_bounding_coordinate' -->
+          <xsd:element name="east_bounding_coordinate" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="EAST_BOUNDING_COORDINATE" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'west_bounding_coordinate' -->
+          <xsd:element name="west_bounding_coordinate" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="WEST_BOUNDING_COORDINATE" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'north_bounding_coordinate' -->
+          <xsd:element name="north_bounding_coordinate" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="NORTH_BOUNDING_COORDINATE" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'south_bounding_coordinate' -->
+          <xsd:element name="south_bounding_coordinate" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOUTH_BOUNDING_COORDINATE" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinTaxonomy                                               -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinDatasetTaxonomy" type="app:DatasetTaxonomyType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.DATA_SET_TAXONOMY</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:taxonomy:">
+          <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+          <deegreewfs:MappingField field="CATEGORY_CODE" type="INTEGER" />
+          <deegreewfs:MappingField field="FAMILY_CODE" type="INTEGER" />
+          <deegreewfs:MappingField field="SPECIES_NUMBER" type="INTEGER" />
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="DatasetTaxonomyType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'data_set_id' -->
+          <xsd:element name="data_set_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'category_code' -->
+          <xsd:element name="category_code" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CATEGORY_CODE" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'family_code' -->
+          <xsd:element name="family_code" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:SQLFunctionCall call="to_char($1,'FM000')" type="VARCHAR">
+                    <deegreewfs:FunctionParam>
+                  		<deegreewfs:MappingField field="FAMILY_CODE" type="INTEGER" />
+                    </deegreewfs:FunctionParam>
+                  </deegreewfs:SQLFunctionCall>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'species_number' -->
+          <xsd:element name="species_number" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:SQLFunctionCall call="to_char($1,'FM000')" type="VARCHAR">
+                    <deegreewfs:FunctionParam>
+                  		<deegreewfs:MappingField field="SPECIES_NUMBER" type="INTEGER" />
+                    </deegreewfs:FunctionParam>
+                  </deegreewfs:SQLFunctionCall>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinDatasetUrls                                                   -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinDatasetUrls" type="app:DatasetUrlsType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.DATA_SET_URLS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:url:">
+          <deegreewfs:MappingField field="URL_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="DatasetUrlsType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'person_id' -->
+          <xsd:element name="url_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="URL_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'link_url' -->
+          <xsd:element name="link_url" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LINK_URL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_description' -->
+          <xsd:element name="source_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'link_type' -->
+          <xsd:element name="link_type" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LINK_TYPE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'local_flag' -->
+          <xsd:element name="local_flag" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LOCAL_FLAG" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- Coverage                                                            -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinDataCoverage" type="app:CoverageType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.DATA_COVERAGE</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:coverage:">
+          <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="CoverageType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'data_set_id' -->
+          <xsd:element name="data_set_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs' -->
+          <xsd:element name="csquares_refs" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs2' -->
+          <xsd:element name="csquares_refs2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS2" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs3' -->
+          <xsd:element name="csquares_refs3" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS3" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs4' -->
+          <xsd:element name="csquares_refs4" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS4" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs5' -->
+          <xsd:element name="csquares_refs5" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS5" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs6' -->
+          <xsd:element name="csquares_refs6" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS6" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs7' -->
+          <xsd:element name="csquares_refs7" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS7" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'csquares_refs8' -->
+          <xsd:element name="csquares_refs8" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CSQUARES_REFS8" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- Users                                                               -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinUsers" type="app:UserType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.USERS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:users:">
+          <deegreewfs:MappingField field="LOGON_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="UserType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'person_id' -->
+          <xsd:element name="logon_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LOGON_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'surname' -->
+          <xsd:element name="surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'given_names' -->
+          <xsd:element name="given_names" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GIVEN_NAMES" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'organisation_id' -->
+          <xsd:element name="organisation_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORG_ORGANISATION_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'email' -->
+          <xsd:element name="email" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="EMAIL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'telephone' -->
+					<!--
+          <xsd:element name="telephone" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PHONE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+					-->
+          <!-- complex valued property 'organisation' -->
+          <xsd:element name="organisation" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinOrganisations">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="ORG_ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- Persons                                                             -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinPersons" type="app:PersonType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.PERSONS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:person:">
+          <deegreewfs:MappingField field="PERSON_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="PersonType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'person_id' -->
+          <xsd:element name="person_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PERSON_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'surname' -->
+          <xsd:element name="surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'given_names' -->
+          <xsd:element name="given_names" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GIVEN_NAMES" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'organisation_id' -->
+          <xsd:element name="organisation_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'title' -->
+          <xsd:element name="title" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="TITLE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'position_name' -->
+          <xsd:element name="position_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="POSITION_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'email' -->
+          <xsd:element name="email" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="EMAIL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_address_1' -->
+          <xsd:element name="mail_address_1" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_ADDRESS_1" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_locality' -->
+          <xsd:element name="mail_locality" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_LOCALITY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_state' -->
+          <xsd:element name="mail_state" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_STATE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_postcode' -->
+          <xsd:element name="mail_postcode" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_POSTCODE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'telephone' -->
+          <xsd:element name="telephone" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="TELEPHONE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'facsimile' -->
+          <xsd:element name="facsimile" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="FACSIMILE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- complex valued property 'organisation' -->
+          <xsd:element name="organisation" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinOrganisations">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinUnits                                                         -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinUnits" type="app:UnitType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.UNITS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:unit:">
+          <deegreewfs:MappingField field="UNIT_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="UnitType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'unit_id' -->
+          <xsd:element name="unit_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="UNIT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'unit_abbreviation' -->
+          <xsd:element name="unit_abbreviation" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="UNIT_ABBREVIATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'unit_name' -->
+          <xsd:element name="unit_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="UNIT_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinKeywords                                                      -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinKeywords" type="app:KeywordType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.KEYWORDS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:keyword:">
+          <deegreewfs:MappingField field="KEYWORD_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="KeywordType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'keyword_id' -->
+          <xsd:element name="keyword_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="KEYWORD_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'keyword_level' -->
+          <xsd:element name="keyword_level" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="KEYWORD_LEVEL" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'keyword_type' -->
+          <xsd:element name="keyword_type" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:SQLFunctionCall call="TRIM($1)" type="VARCHAR">
+                    <deegreewfs:FunctionParam>
+                  		<deegreewfs:MappingField field="KEYWORD_TYPE" type="VARCHAR" />
+                    </deegreewfs:FunctionParam>
+                  </deegreewfs:SQLFunctionCall>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'anzlic_search_word' -->
+          <xsd:element name="anzlic_search_word" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_SEARCH_WORD" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'anzlic_qualifer' -->
+          <xsd:element name="anzlic_qualifier" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ANZLIC_QUALIFIER" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'description' -->
+          <xsd:element name="description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'gcmd_category' -->
+          <xsd:element name="gcmd_category" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GCMD_CATEGORY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'gcmd_topic' -->
+          <xsd:element name="gcmd_topic" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GCMD_TOPIC" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'gcmd_term' -->
+          <xsd:element name="gcmd_term" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GCMD_TERM" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'gcmd_variable' -->
+          <xsd:element name="gcmd_variable" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GCMD_VARIABLE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'detailed_variable' -->
+          <xsd:element name="detailed_variable" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DETAILED_VARIABLE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinOrganisations                                                 -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinOrganisations" type="app:OrganisationType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.ORGANISATIONS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:org:">
+          <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="OrganisationType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'organisation_id' -->
+          <xsd:element name="organisation_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORGANISATION_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'organisation_name' -->
+          <xsd:element name="organisation_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORGANISATION_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'organisation_type' -->
+          <xsd:element name="organisation_type" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORGANISATION_TYPE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_address_1' -->
+          <xsd:element name="mail_address_1" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_ADDRESS_1" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_address_2' -->
+          <xsd:element name="mail_address_2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_ADDRESS_2" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_locality' -->
+          <xsd:element name="mail_locality" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_LOCALITY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_state' -->
+          <xsd:element name="mail_state" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_STATE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'mail_postcode' -->
+          <xsd:element name="mail_postcode" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MAIL_POSTCODE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'street_address_1' -->
+          <xsd:element name="street_address_1" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="STREET_ADDRESS_1" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'street_address_2' -->
+          <xsd:element name="street_address_2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="STREET_ADDRESS_2" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'street_address_3' -->
+          <xsd:element name="street_address_3" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="STREET_ADDRESS_3" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'locality' -->
+          <xsd:element name="locality" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="LOCALITY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'state' -->
+          <xsd:element name="state" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="STATE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'postcode' -->
+          <xsd:element name="postcode" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="POSTCODE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'country' -->
+          <xsd:element name="country" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="COUNTRY" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'web_address' -->
+          <xsd:element name="web_address" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="WEB_ADDRESS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'telephone' -->
+          <xsd:element name="telephone" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="TELEPHONE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'facsimile' -->
+          <xsd:element name="facsimile" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="FACSIMILE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'organisation_acronym' -->
+          <xsd:element name="organisation_acronym" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="ORGANISATION_ACRONYM" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinGlobalProjects                                                -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinGlobalProjects" type="app:GlobalProjectType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.GLOBAL_PROJECTS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:globalproject:">
+          <deegreewfs:MappingField field="GLOBAL_PROJECT_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="GlobalProjectType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'project_id' -->
+          <xsd:element name="global_project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GLOBAL_PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'global_project_full_name' -->
+          <xsd:element name="global_project_full_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GLOBAL_PROJECT_FULL_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'global_project_abbr' -->
+          <xsd:element name="global_project_abbr" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GLOBAL_PROJECT_ABBR" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinProjects                                                      -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinProjects" type="app:ProjectType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.PROJECTS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:project:">
+          <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="ProjectType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'project_id' -->
+          <xsd:element name="project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_name' -->
+          <xsd:element name="project_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader1_surname' -->
+          <xsd:element name="project_leader1_surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER1_SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader2_surname' -->
+          <xsd:element name="project_leader2_surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER2_SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader3_surname' -->
+          <xsd:element name="project_leader3_surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER3_SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader1_othname' -->
+          <xsd:element name="project_leader1_othname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER1_OTHNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader2_othname' -->
+          <xsd:element name="project_leader2_othname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER2_OTHNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_leader3_othname' -->
+          <xsd:element name="project_leader3_othname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER3_OTHNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_organisation1' -->
+          <xsd:element name="project_organisation1" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ORGANISATION1" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_organisation2' -->
+          <xsd:element name="project_organisation2" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ORGANISATION2" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_organisation3' -->
+          <xsd:element name="project_organisation3" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ORGANISATION3" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_start_year' -->
+          <xsd:element name="project_start_year" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_START_YEAR" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_end_year' -->
+          <xsd:element name="project_end_year" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_END_YEAR" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_description' -->
+          <xsd:element name="project_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_full_description' -->
+          <xsd:element name="project_full_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_FULL_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_full_description2' -->
+          <xsd:element name="project_full_description2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_FULL_DESCRIPTION2" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_remarks' -->
+          <xsd:element name="project_remarks" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_REMARKS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_short_name' -->
+          <xsd:element name="project_short_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_SHORT_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_pss_id' -->
+          <xsd:element name="project_pss_id" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_PSS_ID" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'div_hier_level_1' -->
+          <xsd:element name="div_hier_level_1" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DIV_HIER_LEVEL_1" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'div_hier_level_2' -->
+          <xsd:element name="div_hier_level_2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DIV_HIER_LEVEL_2" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'div_hier_level_3' -->
+          <xsd:element name="div_hier_level_3" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DIV_HIER_LEVEL_3" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_trim_identifiers' -->
+          <xsd:element name="project_trim_identifiers" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_TRIM_IDENTIFIERS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_trim_identifiers' -->
+          <xsd:element name="project_leader1_ident" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_LEADER1_IDENT" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'project_personnel' -->
+          <xsd:element name="project_personnel" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_PERSONNEL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'customers' -->
+          <xsd:element name="customers" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CUSTOMERS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- complex valued property 'surveys' -->
+          <xsd:element name="surveys" type="gml:FeaturePropertyType">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+                <deegreewfs:Content type="app:MarlinSurveys">
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinSurveys                                                       -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinSurveys" type="app:SurveyType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.SURVEYS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:survey:">
+          <deegreewfs:MappingField field="SURVEY_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="SurveyType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'survey_id' -->
+          <xsd:element name="survey_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'source_id' -->
+          <xsd:element name="source_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'project_id' -->
+          <xsd:element name="project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'global_project_id' -->
+          <xsd:element name="global_project_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="GLOBAL_PROJECT_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_name' -->
+          <xsd:element name="survey_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_name' -->
+          <xsd:element name="source_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+								<deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_NAME" type="VARCHAR"/>
+                  <deegreewfs:Relation>
+                    <deegreewfs:From>
+                      <deegreewfs:MappingField field="SOURCE_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To fk="true">
+                      <deegreewfs:MappingField field="SOURCE_ID" type="INTEGER" table="MARLIN.SOURCES"/>
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>	
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_leader_surname' -->
+          <xsd:element name="survey_leader_surname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_LEADER_SURNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_leader_firstname' -->
+          <xsd:element name="survey_leader_firstname" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_LEADER_FIRSTNAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_leader_initials' -->
+          <xsd:element name="survey_leader_initials" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_LEADER_INITIALS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_leader_affiliation' -->
+          <xsd:element name="survey_leader_affiliation" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_LEADER_AFFILIATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_start_year' -->
+          <xsd:element name="survey_start_year" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_YEAR" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_start_month' -->
+          <xsd:element name="survey_start_month" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_MONTH" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_start_day' -->
+          <xsd:element name="survey_start_day" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_DAY" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_end_year' -->
+          <xsd:element name="survey_end_year" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_YEAR" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_end_month' -->
+          <xsd:element name="survey_end_month" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_MONTH" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (integer) valued property 'survey_end_day' -->
+          <xsd:element name="survey_end_day" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_DAY" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_description' -->
+          <xsd:element name="survey_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_documentation' -->
+          <xsd:element name="survey_documentation" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_DOCUMENTATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_data_locations' -->
+          <xsd:element name="survey_data_locations" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_DATA_LOCATIONS" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_region' -->
+          <xsd:element name="survey_region" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_REGION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_start_location' -->
+          <xsd:element name="survey_start_location" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_LOCATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_end_location' -->
+          <xsd:element name="survey_end_location" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_LOCATION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'survey_start_lat' -->
+          <xsd:element name="survey_start_lat" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_LAT" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'survey_start_lon' -->
+          <xsd:element name="survey_start_lon" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_START_LONG" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'survey_end_lat' -->
+          <xsd:element name="survey_end_lat" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_LAT" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (float) valued property 'survey_end_lon' -->
+          <xsd:element name="survey_end_lon" type="xsd:float">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_END_LONG" type="FLOAT" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'voyage_track_url' -->
+          <xsd:element name="voyage_track_url" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="VOYAGE_TRACK_URL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_report_url' -->
+          <xsd:element name="survey_report_url" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_REPORT_URL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'survey_plan_url' -->
+          <xsd:element name="survey_plan_url" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SURVEY_PLAN_URL" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'marlin_appear_flag' -->
+          <xsd:element name="marlin_appear_flag" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="MARLIN_APPEAR_FLAG" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple valued (integer) property 'data_set_id' located in related table data_set_surveys -->
+          <xsd:element name="data_set_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATA_SET_ID" type="INTEGER" />
+                  <deegreewfs:Relation>
+                    <deegreewfs:From fk="true">
+                      <deegreewfs:MappingField field="SURVEY_ID" type="INTEGER" />
+                    </deegreewfs:From>
+                    <deegreewfs:To>
+                      <deegreewfs:MappingField field="SURVEY_ID" type="INTEGER" table="MARLIN.DATA_SET_SURVEYS"/>
+                    </deegreewfs:To>
+                  </deegreewfs:Relation>
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinCaab                                                          -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinCaab" type="app:CaabType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.CAAB_SPECIES_DUMP</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:caab:">
+          <deegreewfs:MappingField field="SPCODE" type="INTEGER" />
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="CaabType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'data_set_id' -->
+          <xsd:element name="spcode" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SPCODE" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'common_name' -->
+          <xsd:element name="common_name" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="COMMON_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'scientific_name' -->
+          <xsd:element name="scientific_name" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SCIENTIFIC_NAME" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (date) valued property 'date_last_modified' -->
+          <xsd:element name="date_last_modified" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATE_LAST_MODIFIED" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (date) valued property 'date_extracted' -->
+          <xsd:element name="date_extracted" type="xsd:date">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="DATE_EXTRACTED" type="DATE" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- MarlinSources                                                       -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="MarlinSources" type="app:SourceType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>MARLIN.SOURCES</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:source:">
+          <deegreewfs:MappingField field="SOURCE_ID" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="SourceType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'survey_id' -->
+          <xsd:element name="source_id" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_ID" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_name' -->
+          <xsd:element name="source_name" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+								<deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_NAME" type="VARCHAR"/>
+                </deegreewfs:Content>	
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_type' -->
+          <xsd:element name="source_type" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_TYPE" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_description' -->
+          <xsd:element name="source_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="SOURCE_DESCRIPTION" type="VARCHAR" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- =================================================================== -->
+  <!-- WarehouseCodelists                                                  -->
+  <!-- =================================================================== -->
+
+  <xsd:element name="WarehouseCodelists" type="app:WarehouseCodelistsType" substitutionGroup="gml:_Feature">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <deegreewfs:table>WAREHOUSECODELISTS</deegreewfs:table>
+        <deegreewfs:gmlId prefix="urn:marine.csiro.au:warehousecodelists:">
+          <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" />
+          <deegreewfs:IdGenerator type="DB_SEQ">
+            <deegreewfs:param name="sequence">FID_seq</deegreewfs:param>
+          </deegreewfs:IdGenerator>
+          <deegreewfs:IdentityPart>false</deegreewfs:IdentityPart>
+        </deegreewfs:gmlId>
+        <deegreewfs:visible>true</deegreewfs:visible>
+        <deegreewfs:transaction update="false" delete="false" insert="false" />
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- =================================================================== -->
+
+  <xsd:complexType name="WarehouseCodelistsType">
+    <xsd:complexContent>
+      <xsd:extension base="gml:AbstractFeatureType">
+        <xsd:sequence>
+          <!-- simple (integer) valued property 'code_value' -->
+          <xsd:element name="code_value" type="xsd:integer">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <deegreewfs:IdentityPart>true</deegreewfs:IdentityPart>
+                <deegreewfs:Content>
+                  <deegreewfs:MappingField field="CODE_VALUE" type="INTEGER" />
+                </deegreewfs:Content>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- simple (string) valued property 'source_name' -->
+          <xsd:element name="code_value_description" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo>
+								<deegreewfs:Content>
+                  <deegreewfs:MappingField field="CODE_VALUE_DESCRIPTION" type="VARCHAR"/>
+                </deegreewfs:Content>	
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+</xsd:schema>
